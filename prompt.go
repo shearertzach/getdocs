@@ -39,30 +39,30 @@ func addlanguageprompt() {
 
 	// Prompt and store for the NAME of their language
 	time.Sleep(1 * time.Second)
-	fmt.Print("Name of langauge: ")
+	fmt.Print("Name of language: ")
 	time.Sleep(1 * time.Second)
 	scanner.Scan()
-	language_name := scanner.Text()
+	languagename := scanner.Text()
 	// Prompt and store for the URL to the documentation
 	fmt.Print("URL to the language documentation: ")
 	time.Sleep(1 * time.Second)
 	scanner.Scan()
-	language_url := scanner.Text()
+	languageurl := scanner.Text()
 
 	// Create new language object
 	new := &language{
-		Name:     string(language_name),
-		Url:      string(language_url),
+		Name:     string(languagename),
+		Url:      string(languageurl),
 		Category: devType.Name,
 	}
 	newJson, _ := json.Marshal(new)
-	filename := "languages/" + language_name + ".json"
+	filename := "languages/" + languagename + ".json"
 
-	// Write new langauge to text file
-	if _, exists_err := os.Stat("languages/"); errors.Is(exists_err, os.ErrNotExist) {
+	// Write new language to text file
+	if _, existsErr := os.Stat("languages/"); errors.Is(existsErr, os.ErrNotExist) {
 		os.Mkdir("languages", os.ModePerm)
 	}
-	if _, exists_err := os.Stat(filename); errors.Is(exists_err, os.ErrNotExist) {
+	if _, existsErr := os.Stat(filename); errors.Is(existsErr, os.ErrNotExist) {
 		ioutil.WriteFile(filename, newJson, 0644)
 	}
 }
